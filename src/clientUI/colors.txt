@@ -1,0 +1,6 @@
+primary #00897B
+secondary #B2DFDB
+light #E0F2F1
+
+-fx-background-color
+-fx-border-color
