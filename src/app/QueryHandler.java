@@ -35,7 +35,7 @@ public class QueryHandler implements Runnable{
         }
 
         if (o != null) {
-            System.out.println(o);
+//            System.out.println(o);
             try {
                 Command command = (Command) o;
                 //System.out.println("команда " + command);

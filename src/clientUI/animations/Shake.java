@@ -2,6 +2,7 @@ package clientUI.animations;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.util.Duration;
 
 public class Shake {

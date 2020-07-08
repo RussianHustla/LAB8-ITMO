@@ -1,5 +1,6 @@
 package clientUI.controllers;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
@@ -24,12 +25,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.postgresql.util.PSQLException;
 
 import static clientUI.ClientUI.currentBundle;
 
 public class AuthorizationController {
+    public Stage stage = null;
 
 
     @FXML
@@ -126,8 +129,15 @@ public class AuthorizationController {
 
                     Parent root = loader.getRoot();
                     Stage stage = new Stage();
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    Dimension sSize = Toolkit.getDefaultToolkit ().getScreenSize();
+                    int vert = sSize.height;
+                    int hor  = sSize.width;
+
+                    stage.setWidth(hor);
+                    stage.setHeight(vert-50);
                     stage.setScene(new Scene(root));
-                    stage.showAndWait();
+                    stage.show();
 //                    AppController controller = loader.getController();
 
                     stage.setOnCloseRequest(event1 -> {
@@ -228,9 +238,12 @@ public class AuthorizationController {
                     }
 
                     Parent root = loader.getRoot();
-                    Stage stage = new Stage();
+                    stage = new Stage();
+//                    stage.initStyle(StageStyle.UTILITY);
+//                    stage.setIconified(false);
                     stage.setScene(new Scene(root));
                     stage.showAndWait();
+
 
 
                     //System.out.println(user);

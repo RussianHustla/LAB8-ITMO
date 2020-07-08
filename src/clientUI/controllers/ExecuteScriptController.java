@@ -28,6 +28,7 @@ import network.Client;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import static clientUI.ClientUI.currentBundle;
 import static clientUI.controllers.AppController.PORT;
 import static clientUI.controllers.AppController.ADDR;
 
@@ -54,7 +55,7 @@ public class ExecuteScriptController {
 
     @FXML
     void initialize() {
-
+        translate();
 
 
         execute_button.setOnAction(event -> {
@@ -256,6 +257,15 @@ public class ExecuteScriptController {
     }
 
     public void translate() {
+        try {
+            path_field.setPromptText(new String(currentBundle.getString("path_prompt").getBytes ("ISO-8859-1"),"windows-1251"));
+            script_label.setText(new String(currentBundle.getString("script_label").getBytes ("ISO-8859-1"),"windows-1251"));
+            execute_button.setText(new String(currentBundle.getString("execute_button").getBytes ("ISO-8859-1"),"windows-1251"));
+
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
     }
 

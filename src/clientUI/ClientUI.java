@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.ResourceBundle;
 
@@ -19,7 +20,8 @@ public class ClientUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view/authorization.fxml"));
-        primaryStage.setTitle("Салам Аллейкум");
+        primaryStage.setTitle("Лаб8 Зайцев Максим P3111");
+//        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root, 700, 400));
         primaryStage.show();
     }

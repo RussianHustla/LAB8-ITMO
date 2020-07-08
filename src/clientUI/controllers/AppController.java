@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import app.DBManager;
 import app.UserInterface;
 import clientUI.ClientUI;
+import clientUI.animations.Shake;
 import collection.Coordinates;
 import collection.Flat;
 import collection.Furnish;
@@ -207,6 +208,8 @@ public class AppController {
 
     @FXML
     void initialize() {
+
+
 
         refresh_button.setText("X");
 
@@ -623,18 +626,25 @@ public class AppController {
 
     public static Object requestToServer(Object o) throws IOException, ClassNotFoundException {
 //        System.out.println("ловим сокет");
-        s = new Socket(ADDR, PORT);
-        out = s.getOutputStream();
-        in = s.getInputStream();
+        Object response = null;
+        try {
+            s = new Socket(ADDR, PORT);
+            out = s.getOutputStream();
+            in = s.getInputStream();
 //        System.out.println("пiмав сокет");
-        userInterface = new UserInterface(in, out);
-        //System.out.println(answer.length());
+            userInterface = new UserInterface(in, out);
+            //System.out.println(answer.length());
 
 
-        //userInterface.send(null);
-        userInterface.send(o);
+            //userInterface.send(null);
+            userInterface.send(o);
 //        System.out.println("отправляем " + o);
-        Object response = userInterface.receive();
+            response = userInterface.receive();
+        } catch (ConnectException e) {
+            System.err.println("Сервер отключен, приложение закрывается : (");
+            System.exit(0);
+        }
+
 
 //        System.out.println(response);
 
@@ -645,6 +655,8 @@ public class AppController {
         return response;
     }
 
+
+    //метод для обновления по кнопке, более не актуален.
     public void refresh_table() throws IOException, ClassNotFoundException {
         flats.clear();
         flats_table.setItems(flats);
@@ -743,8 +755,10 @@ public class AppController {
         System.out.println(corX);
         System.out.println(corY);
         context.fillOval(corX,corY, radius, radius);
+        Shake animation = new Shake(visual_canvas);
+        animation.play();
 //        context.strokeOval(corX,corY, radius, radius);
-        System.out.println("рисуем круг");
+//        System.out.println("рисуем круг");
     }
 
     public double corrX(double x) {
@@ -949,18 +963,7 @@ public class AppController {
                 Collections.sort(collection);
                 if (hasCollectionsDiff(flats, collection)) {
                     System.out.println("\n\n\n" + "Обнаружено изменение в коллекции" + "\n\n\n");
-//                    System.out.println("Отличия:");
-//                    for (int i = 0; i < flats.size(); i++) {
-//                        Flat flat = flats.get(i);
-//                        Flat flat1 = collection.get(i);
-//                            if (!flat.toString().equals(flat1.toString())) {
-//                                System.out.println("разнист 1: ");
-//                                System.out.println(flat);
-//                                System.out.println("разнист 2: ");
-//                                System.out.println(flat1);
-//                            }
-//
-//                    }
+
                     flats.clear();
                     flats_table.setItems(flats);
 
